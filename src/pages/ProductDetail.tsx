@@ -1,10 +1,17 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { products } from "@/data/products";
-import { ArrowLeft, Star, MessageSquare, Check, Truck, Shield, RefreshCw } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowLeft, Star, MessageSquare, Truck, Shield, RefreshCw } from "lucide-react";
 import categoryLiving from "@/assets/category-living.jpg";
 import categoryBedroom from "@/assets/category-bedroom.jpg";
 import categoryDining from "@/assets/category-dining.jpg";
@@ -22,6 +29,7 @@ const productImages: { [key: string]: string } = {
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   
   const product = products.find((p) => p.id === id);
 
@@ -46,10 +54,6 @@ const ProductDetail = () => {
       currency: "INR",
       maximumFractionDigits: 0,
     }).format(price);
-  };
-
-  const handleAskForQuote = () => {
-    toast.success("Quote request submitted! We'll contact you shortly.");
   };
 
   return (
@@ -179,14 +183,14 @@ const ProductDetail = () => {
               <Button
                 size="lg"
                 className="w-full text-lg py-6"
-                onClick={handleAskForQuote}
+                onClick={() => setIsQuoteModalOpen(true)}
               >
                 <MessageSquare className="h-5 w-5 mr-2" />
-                Ask for Quote
+                Ask for Quotation
               </Button>
 
               <p className="text-sm text-muted-foreground text-center">
-                Submit a quote request and our team will get back to you within 24 hours
+                Click to request a quote and our team will get back to you within 24 hours
               </p>
             </div>
           </div>
@@ -226,6 +230,30 @@ const ProductDetail = () => {
         </div>
       </main>
       <Footer />
+
+      {/* Quote Request Modal */}
+      <Dialog open={isQuoteModalOpen} onOpenChange={setIsQuoteModalOpen}>
+        <DialogContent className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Request a Quote</DialogTitle>
+            <DialogDescription>
+              Fill out the form below to request a quote for <span className="font-semibold text-foreground">{product.name}</span>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            <iframe
+              src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true&entry.1234567890=${encodeURIComponent(product.name)}&entry.0987654321=${encodeURIComponent(product.id)}"
+              width="100%"
+              height="600"
+              frameBorder="0"
+              className="w-full rounded-lg"
+              style={{ minHeight: "600px" }}
+            >
+              Loading…
+            </iframe>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
