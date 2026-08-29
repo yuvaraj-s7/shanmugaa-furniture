@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Star, ArrowRight } from "lucide-react";
 import { products } from "@/data/products";
@@ -19,6 +20,7 @@ const productImages: { [key: string]: string } = {
 };
 
 const FeaturedProducts = () => {
+  const { t } = useTranslation();
   const { addToCart } = useCart();
   const featuredProducts = products.filter((p) => p.featured).slice(0, 4);
 
@@ -48,15 +50,15 @@ const FeaturedProducts = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
           <div>
             <span className="text-gold font-medium tracking-widest text-sm uppercase">
-              Handpicked For You
+              {t('featured.handpicked')}
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-2">
-              Featured Products
+              {t('featured.title')}
             </h2>
           </div>
           <Link to="/products" className="mt-4 md:mt-0">
             <Button variant="outline" className="group">
-              View All Products
+              {t('featured.viewAll')}
               <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
@@ -89,7 +91,7 @@ const FeaturedProducts = () => {
                   onClick={() => handleAddToCart(product)}
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" />
-                  Add to Cart
+                  {t('featured.addToCart')}
                 </Button>
               </div>
 

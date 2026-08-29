@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ const productImages: { [key: string]: string } = {
 };
 
 const ProductDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -39,8 +41,8 @@ const ProductDetail = () => {
         <Header />
         <main className="pt-20">
           <div className="container mx-auto px-4 py-16 text-center">
-            <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-            <Button onClick={() => navigate("/products")}>Back to Products</Button>
+            <h1 className="text-2xl font-bold mb-4">{t('productDetail.notFound')}</h1>
+            <Button onClick={() => navigate("/products")}>{t('productDetail.backToProducts')}</Button>
           </div>
         </main>
         <Footer />
@@ -63,9 +65,9 @@ const ProductDetail = () => {
         <div className="container mx-auto px-4 py-12">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-primary">Home</Link>
+            <Link to="/" className="hover:text-primary">{t('nav.home')}</Link>
             <span>/</span>
-            <Link to="/products" className="hover:text-primary">Products</Link>
+            <Link to="/products" className="hover:text-primary">{t('nav.products')}</Link>
             <span>/</span>
             <span className="text-foreground">{product.name}</span>
           </div>
@@ -131,24 +133,24 @@ const ProductDetail = () => {
 
               {/* Specifications */}
               <div className="bg-card rounded-xl p-6 space-y-4 border">
-                <h3 className="font-semibold text-lg">Specifications</h3>
+                <h3 className="font-semibold text-lg">{t('productDetail.specifications')}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <span className="text-sm text-muted-foreground">Material</span>
+                    <span className="text-sm text-muted-foreground">{t('productDetail.material')}</span>
                     <p className="font-medium">{product.material}</p>
                   </div>
                   <div>
-                    <span className="text-sm text-muted-foreground">Dimensions</span>
+                    <span className="text-sm text-muted-foreground">{t('productDetail.dimensions')}</span>
                     <p className="font-medium">{product.dimensions}</p>
                   </div>
                   <div>
-                    <span className="text-sm text-muted-foreground">Availability</span>
+                    <span className="text-sm text-muted-foreground">{t('productDetail.availability')}</span>
                     <p className={`font-medium ${product.inStock ? "text-green-600" : "text-red-600"}`}>
-                      {product.inStock ? "In Stock" : "Out of Stock"}
+                      {product.inStock ? t('productDetail.inStock') : t('productDetail.outOfStock')}
                     </p>
                   </div>
                   <div>
-                    <span className="text-sm text-muted-foreground">Category</span>
+                    <span className="text-sm text-muted-foreground">{t('productDetail.category')}</span>
                     <p className="font-medium capitalize">{product.category.replace("-", " ")}</p>
                   </div>
                 </div>
@@ -159,22 +161,22 @@ const ProductDetail = () => {
                 <div className="flex items-center gap-3 p-4 bg-card rounded-lg border">
                   <Truck className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium text-sm">Free Delivery</p>
-                    <p className="text-xs text-muted-foreground">Within city</p>
+                    <p className="font-medium text-sm">{t('productDetail.features.freeDelivery')}</p>
+                    <p className="text-xs text-muted-foreground">{t('productDetail.features.freeDeliveryDesc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-card rounded-lg border">
                   <Shield className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium text-sm">5 Year Warranty</p>
-                    <p className="text-xs text-muted-foreground">On all products</p>
+                    <p className="font-medium text-sm">{t('productDetail.features.warranty')}</p>
+                    <p className="text-xs text-muted-foreground">{t('productDetail.features.warrantyDesc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-card rounded-lg border">
                   <RefreshCw className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium text-sm">Easy Returns</p>
-                    <p className="text-xs text-muted-foreground">30 days policy</p>
+                    <p className="font-medium text-sm">{t('productDetail.features.easyReturns')}</p>
+                    <p className="text-xs text-muted-foreground">{t('productDetail.features.easyReturnsDesc')}</p>
                   </div>
                 </div>
               </div>
@@ -186,18 +188,18 @@ const ProductDetail = () => {
                 onClick={() => setIsQuoteModalOpen(true)}
               >
                 <MessageSquare className="h-5 w-5 mr-2" />
-                Ask for Quotation
+                {t('common.quote')}
               </Button>
 
               <p className="text-sm text-muted-foreground text-center">
-                Click to request a quote and our team will get back to you within 24 hours
+                {t('products.quoteInfo')}
               </p>
             </div>
           </div>
 
           {/* Related Products */}
           <div className="mt-16">
-            <h2 className="font-display text-2xl font-bold mb-8">Related Products</h2>
+            <h2 className="font-display text-2xl font-bold mb-8">{t('productDetail.relatedProducts')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {products
                 .filter((p) => p.category === product.category && p.id !== product.id)
@@ -235,9 +237,9 @@ const ProductDetail = () => {
       <Dialog open={isQuoteModalOpen} onOpenChange={setIsQuoteModalOpen}>
         <DialogContent className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Request a Quote</DialogTitle>
+            <DialogTitle>{t('productDetail.requestQuote')}</DialogTitle>
             <DialogDescription>
-              Fill out the form below to request a quote for <span className="font-semibold text-foreground">{product.name}</span>
+              {t('productDetail.quoteDesc')} <span className="font-semibold text-foreground">{product.name}</span>
             </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
@@ -249,7 +251,7 @@ const ProductDetail = () => {
               className="w-full rounded-lg"
               style={{ minHeight: "600px" }}
             >
-              Loading…
+              {t('common.loading')}
             </iframe>
           </div>
         </DialogContent>

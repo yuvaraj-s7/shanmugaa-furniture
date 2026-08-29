@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import categoryLiving from "@/assets/category-living.jpg";
 import categoryBedroom from "@/assets/category-bedroom.jpg";
@@ -15,19 +16,21 @@ const categories = [
 ];
 
 const CategoriesSection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-gold font-medium tracking-widest text-sm uppercase">
-            Browse By
+            {t('categories.browseBy')}
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-2">
-            Our Categories
+            {t('categories.title')}
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Explore our diverse range of furniture collections designed to transform every corner of your home.
+            {t('categories.description')}
           </p>
         </div>
 
@@ -46,12 +49,12 @@ const CategoriesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <span className="text-gold text-sm font-medium">{categories[0].count} Products</span>
+                <span className="text-gold text-sm font-medium">{categories[0].count} {t('categories.products')}</span>
                 <h3 className="font-display text-3xl font-bold text-cream mt-1">
                   {categories[0].name}
                 </h3>
                 <div className="flex items-center gap-2 text-cream/80 mt-4 group-hover:text-gold transition-colors">
-                  <span className="text-sm font-medium">Explore</span>
+                  <span className="text-sm font-medium">{t('categories.explore')}</span>
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -73,12 +76,12 @@ const CategoriesSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="text-gold text-xs font-medium">{category.count} Products</span>
+                  <span className="text-gold text-xs font-medium">{category.count} {t('categories.products')}</span>
                   <h3 className="font-display text-xl font-bold text-cream mt-1">
                     {category.name}
                   </h3>
                   <div className="flex items-center gap-2 text-cream/80 mt-3 group-hover:text-gold transition-colors">
-                    <span className="text-sm font-medium">Explore</span>
+                    <span className="text-sm font-medium">{t('categories.explore')}</span>
                     <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>

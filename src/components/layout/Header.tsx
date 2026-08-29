@@ -1,23 +1,42 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingCart, Search, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Menu, X, ShoppingCart, Search, User, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useCart } from "@/context/CartContext";
+import { CustomQuoteModal } from "@/components/layout/CustomQuoteModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCustomQuoteOpen, setIsCustomQuoteOpen] = useState(false);
   const location = useLocation();
   const { cartItems } = useCart();
+  const { t, i18n } = useTranslation();
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Products", path: "/products" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "nav.home", path: "/" },
+    { name: "nav.products", path: "/products" },
+    { name: "nav.gallery", path: "/gallery" },
+    { name: "nav.about", path: "/about" },
+    { name: "nav.contact", path: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'ta', name: 'தமிழ்' }
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
@@ -27,10 +46,10 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-2">
             <div className="flex flex-col">
               <span className="font-display text-2xl font-bold text-primary tracking-tight">
-                Sri Shanmugaa
+                {t('header.brandName')}
               </span>
               <span className="text-xs text-muted-foreground tracking-widest uppercase">
-                Fine Furniture
+                {t('header.tagline')}
               </span>
             </div>
           </Link>
@@ -47,9 +66,17 @@ const Header = () => {
                     : "text-muted-foreground"
                 }`}
               >
-                {link.name}
+                {t(link.name)}
               </Link>
             ))}
+            <Button
+              variant="elegant"
+              size="sm"
+              onClick={() => setIsCustomQuoteOpen(true)}
+              className="bg-gold text-charcoal hover:bg-gold/90"
+            >
+              {t('header.customQuote')}
+            </Button>
           </nav>
 
           {/* Actions */}
@@ -60,6 +87,27 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="hidden sm:flex">
               <User className="h-5 w-5" />
             </Button>
+            
+            {/* Language Switcher */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="hidden sm:flex">
+                  <Globe className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang.code)}
+                    className={i18n.language === lang.code ? "bg-accent" : ""}
+                  >
+                    {lang.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
             <Link to="/cart" className="relative">
               <Button variant="ghost" size="icon">
                 <ShoppingCart className="h-5 w-5" />
@@ -98,9 +146,26 @@ const Header = () => {
                       : "text-muted-foreground"
                   }`}
                 >
-                  {link.name}
+                  {t(link.name)}
                 </Link>
               ))}
+              
+              {/* Mobile Language Switcher */}
+              <div className="border-t border-border pt-4 mt-2">
+                <p className="text-sm font-medium text-muted-foreground mb-2">Language / மொழி</p>
+                <div className="flex gap-2">
+                  {languages.map((lang) => (
+                    <Button
+                      key={lang.code}
+                      variant={i18n.language === lang.code ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => changeLanguage(lang.code)}
+                    >
+                      {lang.name}
+                    </Button>
+                  ))}
+                </div>
+              </div>
             </div>
           </nav>
         )}

@@ -1,29 +1,32 @@
 import { Truck, Shield, Headphones, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const features = [
   {
     icon: Truck,
-    title: "Free Delivery",
-    description: "Free shipping on orders above ₹50,000 within India.",
+    titleKey: "features.freeDelivery",
+    descKey: "features.freeDeliveryDesc",
   },
   {
     icon: Shield,
-    title: "10 Year Warranty",
-    description: "All our furniture comes with a comprehensive warranty.",
+    titleKey: "features.warranty",
+    descKey: "features.warrantyDesc",
   },
   {
     icon: Headphones,
-    title: "24/7 Support",
-    description: "Our expert team is always ready to assist you.",
+    titleKey: "features.support",
+    descKey: "features.supportDesc",
   },
   {
     icon: Award,
-    title: "Premium Quality",
-    description: "Handcrafted with the finest materials and care.",
+    titleKey: "features.quality",
+    descKey: "features.qualityDesc",
   },
 ];
 
 const FeaturesSection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="py-16 bg-primary">
       <div className="container mx-auto px-4">
@@ -37,10 +40,10 @@ const FeaturesSection = () => {
                 <feature.icon className="h-8 w-8 text-gold" />
               </div>
               <h3 className="font-display text-lg font-semibold text-primary-foreground mb-2">
-                {feature.title}
+                {t(feature.titleKey)}
               </h3>
               <p className="text-primary-foreground/70 text-sm">
-                {feature.description}
+                {t(feature.descKey)}
               </p>
             </div>
           ))}

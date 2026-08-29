@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ const contactSchema = z.object({
 });
 
 const Contact = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -91,10 +93,10 @@ const Contact = () => {
         <section className="bg-primary py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground">
-              Contact Us
+              {t('contact.title')}
             </h1>
             <p className="text-primary-foreground/80 mt-4 max-w-2xl mx-auto">
-              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              {t('contact.subtitle')}
             </p>
           </div>
         </section>

@@ -1,0 +1,171 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "common": {
+    "search": "Search",
+    "cart": "Cart",
+    "user": "User",
+    "quote": "Ask for Quotation",
+    "loading": "Loading...",
+    "readMore": "Read More",
+    "viewDetails": "View Details",
+    "filter": "Filter",
+    "filters": "Filters",
+    "clearFilters": "Clear Filters",
+    "showing": "Showing",
+    "products": "products",
+    "noResults": "No results found",
+    "tryDifferent": "Try different filters or search terms"
+  },
+  "header": {
+    "brandName": "Sri Shanmugaa",
+    "tagline": "Fine Furniture",
+    "customQuote": "Custom Quote"
+  },
+  "home": {
+    "heroTitle": "Crafting Timeless Elegance for Your Home",
+    "heroSubtitle": "Discover our exquisite collection of handcrafted furniture that blends traditional craftsmanship with modern design",
+    "exploreCollection": "Explore Collection",
+    "featuredProducts": "Featured Products",
+    "whyChooseUs": "Why Choose Us",
+    "quality": "Premium Quality",
+    "qualityDesc": "Handcrafted using finest materials",
+    "craftsmanship": "Expert Craftsmanship",
+    "craftsmanshipDesc": "Skilled artisans with decades of experience",
+    "customization": "Customization",
+    "customizationDesc": "Tailored to your specific requirements",
+    "delivery": "Timely Delivery",
+    "deliveryDesc": "Reliable delivery across the region"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Discover our extensive collection of premium furniture crafted with care and precision",
+    "categories": "Categories",
+    "allProducts": "All Products",
+    "priceRange": "Price Range",
+    "searchPlaceholder": "Search products by name, description, material...",
+    "matching": "matching",
+    "noProducts": "No products found matching your criteria",
+    "askForQuote": "Ask for Quote",
+    "quoteSubmitted": "Quote request submitted! We'll contact you shortly",
+    "quoteInfo": "Submit a quote request and our team will get back to you within 24 hours"
+  },
+  "productDetail": {
+    "notFound": "Product Not Found",
+    "backToProducts": "Back to Products",
+    "specifications": "Specifications",
+    "material": "Material",
+    "dimensions": "Dimensions",
+    "availability": "Availability",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "category": "Category",
+    "features": {
+      "freeDelivery": "Free Delivery",
+      "freeDeliveryDesc": "Within city",
+      "warranty": "5 Year Warranty",
+      "warrantyDesc": "On all products",
+      "easyReturns": "Easy Returns",
+      "easyReturnsDesc": "30 days policy"
+    },
+    "requestQuote": "Request a Quote",
+    "quoteDesc": "Fill out the form below to request a quote for",
+    "quoteInfo": "Fill out the form above and our team will get back to you within 24 hours",
+    "relatedProducts": "Related Products"
+  },
+  "gallery": {
+    "title": "Our Gallery",
+    "subtitle": "Explore our completed projects and get inspired for your space"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn about our heritage and commitment to excellence"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us for inquiries and orders"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
+  "hero": {
+    "tagline": "Crafting Elegance Since 1985",
+    "title": "Furniture That Tells Your Story",
+    "description": "Discover our exquisite collection of handcrafted furniture, where timeless elegance meets modern comfort. Each piece is a masterpiece.",
+    "exploreCollection": "Explore Collection",
+    "viewGallery": "View Gallery"
+  },
+  "categories": {
+    "browseBy": "Browse By",
+    "title": "Our Categories",
+    "description": "Explore our diverse range of furniture collections designed to transform every corner of your home.",
+    "products": "Products",
+    "explore": "Explore"
+  },
+  "featured": {
+    "handpicked": "Handpicked For You",
+    "title": "Featured Products",
+    "viewAll": "View All Products",
+    "addToCart": "Add to Cart"
+  },
+  "features": {
+    "freeDelivery": "Free Delivery",
+    "freeDeliveryDesc": "Free shipping on orders above ₹50,000 within India.",
+    "warranty": "10 Year Warranty",
+    "warrantyDesc": "All our furniture comes with a comprehensive warranty.",
+    "support": "24/7 Support",
+    "supportDesc": "Our expert team is always ready to assist you.",
+    "quality": "Premium Quality",
+    "qualityDesc": "Handcrafted with the finest materials and care."
+  },
+  "testimonials": {
+    "whatCustomersSay": "What Our Customers Say",
+    "title": "Customer Reviews"
+  },
+  "cta": {
+    "ready": "Ready to Transform Your Space?",
+    "title": "Let's Create Your Dream Home",
+    "description": "Visit our showroom or get in touch with our design experts for personalized recommendations and exclusive offers.",
+    "contactUs": "Contact Us",
+    "callNow": "Call Now"
+  },
+  "footer": {
+    "brandName": "Sri Shanmugaa",
+    "description": "Crafting exquisite furniture with passion and precision since 1985. We bring elegance and comfort to every home.",
+    "quickLinks": "Quick Links",
+    "categories": "Categories",
+    "contactUs": "Contact Us",
+    "address": "123 Furniture Street, Chennai, Tamil Nadu 600001",
+    "phone": "+91 98765 43210",
+    "email": "info@srishanmugaa.com",
+    "hours": "Mon - Sat: 9AM - 8PM",
+    "copyright": "© {{year}} Sri Shanmugaa Furniture. All rights reserved."
+  },
+  "customQuote": {
+    "title": "Request Custom Quote",
+    "description": "Tell us about your custom furniture requirements and we'll provide you with a personalized quote.",
+    "name": "Your Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "productType": "Product Type",
+    "dimensions": "Dimensions (L x W x H)",
+    "material": "Preferred Material",
+    "budget": "Budget Range",
+    "requirements": "Additional Requirements",
+    "submit": "Submit Request",
+    "submitted": "Quote request submitted! We'll contact you within 24 hours.",
+    "close": "Close"
+  }
+}

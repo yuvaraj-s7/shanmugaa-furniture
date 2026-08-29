@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
   {
@@ -28,16 +29,18 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-gold font-medium tracking-widest text-sm uppercase">
-            What Our Customers Say
+            {t('testimonials.whatCustomersSay')}
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-2">
-            Customer Reviews
+            {t('testimonials.title')}
           </h2>
         </div>
 

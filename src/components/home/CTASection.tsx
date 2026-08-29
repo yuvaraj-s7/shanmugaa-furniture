@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight } from "lucide-react";
 
 const CTASection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="py-24 bg-secondary/50">
       <div className="container mx-auto px-4">
@@ -13,18 +16,18 @@ const CTASection = () => {
           
           <div className="relative">
             <span className="text-gold font-medium tracking-widest text-sm uppercase">
-              Ready to Transform Your Space?
+              {t('cta.ready')}
             </span>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-primary-foreground mt-4 mb-6">
-              Let's Create Your Dream Home
+              {t('cta.title')}
             </h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
-              Visit our showroom or get in touch with our design experts for personalized recommendations and exclusive offers.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
                 <Button variant="gold" size="xl">
-                  Contact Us
+                  {t('cta.contactUs')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -35,7 +38,7 @@ const CTASection = () => {
                   className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
                 >
                   <Phone className="mr-2 h-5 w-5" />
-                  Call Now
+                  {t('cta.callNow')}
                 </Button>
               </a>
             </div>

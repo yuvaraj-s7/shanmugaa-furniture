@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,7 @@ const productImages: { [key: string]: string } = {
 };
 
 const Products = () => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category") || "all";
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,7 +44,7 @@ const Products = () => {
   }, [selectedCategory, priceRange, searchQuery]);
 
   const handleAskForQuote = (product: typeof products[0]) => {
-    toast.success(`Quote request submitted for ${product.name}! We'll contact you shortly.`);
+    toast.success(t('products.quoteSubmitted'));
   };
 
   const formatPrice = (price: number) => {
@@ -61,10 +63,10 @@ const Products = () => {
         <section className="bg-primary py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground">
-              Our Products
+              {t('products.title')}
             </h1>
             <p className="text-primary-foreground/80 mt-4 max-w-2xl mx-auto">
-              Discover our extensive collection of premium furniture crafted with care and precision.
+              {t('products.subtitle')}
             </p>
           </div>
         </section>
@@ -76,7 +78,7 @@ const Products = () => {
               <aside className={`lg:w-64 ${showFilters ? "block" : "hidden lg:block"}`}>
                 <div className="bg-card rounded-2xl p-6 shadow-card sticky top-24">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="font-display text-lg font-semibold">Filters</h3>
+                    <h3 className="font-display text-lg font-semibold">{t('common.filters')}</h3>
                     <Button
                       variant="ghost"
                       size="icon"
@@ -90,7 +92,7 @@ const Products = () => {
                   {/* Categories */}
                   <div className="mb-8">
                     <h4 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-4">
-                      Categories
+                      {t('products.categories')}
                     </h4>
                     <div className="space-y-2">
                       <button
@@ -101,7 +103,7 @@ const Products = () => {
                             : "hover:bg-secondary"
                         }`}
                       >
-                        All Products
+                        {t('products.allProducts')}
                       </button>
                       {categories.map((cat) => (
                         <button
@@ -123,7 +125,7 @@ const Products = () => {
                   {/* Price Range */}
                   <div>
                     <h4 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-4">
-                      Price Range
+                      {t('products.priceRange')}
                     </h4>
                     <div className="space-y-4">
                       <input
@@ -150,7 +152,7 @@ const Products = () => {
                 <div className="lg:hidden mb-6">
                   <Button variant="outline" onClick={() => setShowFilters(true)}>
                     <Filter className="h-4 w-4 mr-2" />
-                    Filters
+                    {t('common.filter')}
                   </Button>
                 </div>
 
@@ -160,7 +162,7 @@ const Products = () => {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
-                      placeholder="Search products by name, description, material..."
+                      placeholder={t('products.searchPlaceholder')}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-10"
@@ -170,8 +172,8 @@ const Products = () => {
 
                 {/* Results Count */}
                 <p className="text-muted-foreground mb-6">
-                  Showing {filteredProducts.length} products
-                  {searchQuery && ` matching "${searchQuery}"`}
+                  {t('common.showing')} {filteredProducts.length} {t('common.products')}
+                  {searchQuery && ` ${t('products.matching')} "${searchQuery}"`}
                 </p>
 
                 {/* Grid */}
@@ -200,7 +202,7 @@ const Products = () => {
                           onClick={() => handleAskForQuote(product)}
                         >
                           <MessageSquare className="h-4 w-4 mr-2" />
-                          Ask for Quote
+                          {t('products.askForQuote')}
                         </Button>
                       </div>
 
@@ -239,9 +241,9 @@ const Products = () => {
 
                 {filteredProducts.length === 0 && (
                   <div className="text-center py-16">
-                    <p className="text-muted-foreground text-lg">No products found matching your criteria.</p>
+                    <p className="text-muted-foreground text-lg">{t('products.noProducts')}</p>
                     <Button variant="outline" className="mt-4" onClick={() => setSearchParams({})}>
-                      Clear Filters
+                      {t('common.clearFilters')}
                     </Button>
                   </div>
                 )}

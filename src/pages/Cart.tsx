@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ const productImages: { [key: string]: string } = {
 };
 
 const Cart = () => {
+  const { t } = useTranslation();
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
 
   const formatPrice = (price: number) => {
@@ -38,14 +40,14 @@ const Cart = () => {
             <div className="container mx-auto px-4 text-center">
               <ShoppingBag className="h-24 w-24 text-muted-foreground mx-auto mb-6" />
               <h1 className="font-display text-3xl font-bold text-foreground mb-4">
-                Your Cart is Empty
+                {t('cart.empty')}
               </h1>
               <p className="text-muted-foreground mb-8">
                 Looks like you haven't added any items to your cart yet.
               </p>
               <Link to="/products">
                 <Button variant="elegant" size="lg">
-                  Start Shopping
+                  {t('cart.continueShopping')}
                 </Button>
               </Link>
             </div>
@@ -64,7 +66,7 @@ const Cart = () => {
         <section className="bg-primary py-12">
           <div className="container mx-auto px-4">
             <h1 className="font-display text-4xl font-bold text-primary-foreground">
-              Shopping Cart
+              {t('cart.title')}
             </h1>
             <p className="text-primary-foreground/80 mt-2">
               {cartItems.length} {cartItems.length === 1 ? "item" : "items"} in your cart

@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { useTranslation } from "react-i18next";
 import { Award, Users, Clock, Heart } from "lucide-react";
 import categoryLiving from "@/assets/category-living.jpg";
 
@@ -11,6 +12,8 @@ const stats = [
 ];
 
 const About = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen">
       <Header />
@@ -19,10 +22,10 @@ const About = () => {
         <section className="bg-primary py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground">
-              About Us
+              {t('about.title')}
             </h1>
             <p className="text-primary-foreground/80 mt-4 max-w-2xl mx-auto">
-              Crafting timeless furniture with passion and precision since 1985.
+              {t('about.subtitle')}
             </p>
           </div>
         </section>

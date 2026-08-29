@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { galleryImages } from "@/data/products";
@@ -19,9 +20,25 @@ const categoryImageMap: { [key: string]: string } = {
 
 const galleryCategories = ["All", "Living Room", "Bedroom", "Dining Room", "Office", "Outdoor"];
 
+const categoryTranslations: { [key: string]: string } = {
+  "All": "All",
+  "Living Room": "Living Room",
+  "Bedroom": "Bedroom",
+  "Dining Room": "Dining Room",
+  "Office": "Office",
+  "Outdoor": "Outdoor"
+};
+
 const Gallery = () => {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const getCategoryName = (category: string) => {
+    // For now, return the category name as-is since we don't have category translations yet
+    // This can be extended later with proper category translations
+    return category;
+  };
 
   const filteredImages = galleryImages.filter(
     (img) => selectedCategory === "All" || img.category === selectedCategory
@@ -35,10 +52,10 @@ const Gallery = () => {
         <section className="bg-primary py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground">
-              Our Gallery
+              {t('gallery.title')}
             </h1>
             <p className="text-primary-foreground/80 mt-4 max-w-2xl mx-auto">
-              Explore our stunning furniture installations and interior inspirations.
+              {t('gallery.subtitle')}
             </p>
           </div>
         </section>
@@ -57,7 +74,7 @@ const Gallery = () => {
                       : "bg-secondary text-secondary-foreground hover:bg-primary/10"
                   }`}
                 >
-                  {category}
+                  {getCategoryName(category)}
                 </button>
               ))}
             </div>
