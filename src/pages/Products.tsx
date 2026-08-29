@@ -3,9 +3,9 @@ import { useSearchParams, Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { products, categories } from "@/data/products";
-import { useCart } from "@/context/CartContext";
-import { ShoppingCart, Star, Filter, X } from "lucide-react";
+import { MessageSquare, Star, Filter, X, Search } from "lucide-react";
 import { toast } from "sonner";
 import categoryLiving from "@/assets/category-living.jpg";
 import categoryBedroom from "@/assets/category-bedroom.jpg";
@@ -24,27 +24,25 @@ const productImages: { [key: string]: string } = {
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category") || "all";
+  const [searchQuery, setSearchQuery] = useState("");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 200000]);
   const [showFilters, setShowFilters] = useState(false);
-  const { addToCart } = useCart();
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const categoryMatch = selectedCategory === "all" || product.category === selectedCategory;
       const priceMatch = product.price >= priceRange[0] && product.price <= priceRange[1];
-      return categoryMatch && priceMatch;
+      const searchMatch = searchQuery === "" || 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.material.toLowerCase().includes(searchQuery.toLowerCase());
+      return categoryMatch && priceMatch && searchMatch;
     });
-  }, [selectedCategory, priceRange]);
+  }, [selectedCategory, priceRange, searchQuery]);
 
-  const handleAddToCart = (product: typeof products[0]) => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: productImages[product.category] || categoryLiving,
-      category: product.category,
-    });
-    toast.success(`${product.name} added to cart`);
+  const handleAskForQuote = (product: typeof products[0]) => {
+    toast.success(`Quote request submitted for ${product.name}! We'll contact you shortly.`);
   };
 
   const formatPrice = (price: number) => {
@@ -156,9 +154,24 @@ const Products = () => {
                   </Button>
                 </div>
 
+                {/* Search Bar */}
+                <div className="mb-6">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Search products by name, description, material..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+
                 {/* Results Count */}
                 <p className="text-muted-foreground mb-6">
                   Showing {filteredProducts.length} products
+                  {searchQuery && ` matching "${searchQuery}"`}
                 </p>
 
                 {/* Grid */}
@@ -184,10 +197,10 @@ const Products = () => {
                           variant="hero"
                           size="sm"
                           className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                          onClick={() => handleAddToCart(product)}
+                          onClick={() => handleAskForQuote(product)}
                         >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          Add to Cart
+                          <MessageSquare className="h-4 w-4 mr-2" />
+                          Ask for Quote
                         </Button>
                       </div>
 
